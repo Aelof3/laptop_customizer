@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { USCurrencyFormat } from '../modules/USCurrencyFormat';
+import DefaultContext from './context/DefaultContext';
 
-export default class FeatureOption extends Component {
+class FeatureOption extends Component {
+    static contextType = DefaultContext;
     render(){
         return (
             <div key={this.props.itemHash} className="feature__item">
@@ -14,11 +15,11 @@ export default class FeatureOption extends Component {
                     onChange={this.props.handleOnChange}
                 />
                 <label htmlFor={this.props.itemHash} className="feature__label">
-                    {this.props.item.name} ({USCurrencyFormat.format(this.props.item.cost)})
+                    {this.props.item.name} ({this.context.USCurrencyFormat.format(this.props.item.cost)})
                 </label>
             </div>
         );
     }
 }
 
-
+export default FeatureOption;

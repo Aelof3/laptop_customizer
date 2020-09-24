@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import FeatureForm from './components/FeatureForm';
 import Cart from './components/Cart';
-import defaults from './modules/Defaults';
+import DefaultContext from './components/context/DefaultContext';
 
-export default class App extends Component {
+class App extends Component {
+  static contextType = DefaultContext;
+  
   state = {
-    selected: defaults.selected
+    selected: this.context.selected
   };
 
   updateFeature = (feature, newValue) => {
@@ -18,22 +20,26 @@ export default class App extends Component {
   };
 
   render() {
+    const contextValue = {
+      FEATURES: this.context.FEATURES,
+      updateFeature: this.updateFeature,
+      selected: this.state.selected,
+      USCurrencyFormat: this.context.USCurrencyFormat
+    }
     return (
-      <div className="App">
-        <header>
-          <h1>ELF Computing | Laptops</h1>
-        </header>
-        <main>
-          <FeatureForm
-            features={this.props.features}
-            updateFeature={this.updateFeature}
-            selected={this.state.selected}
-          />
-          <Cart 
-            selected={this.state.selected}
-          />
-        </main>
-      </div>
+      <DefaultContext.Provider value={contextValue}>
+        <div className="App">
+          <header>
+            <h1>ELF Computing | Laptops</h1>
+          </header>
+          <main>
+            <FeatureForm />
+            <Cart />
+          </main>
+        </div>
+      </DefaultContext.Provider>
     );
   }
 }
+
+export default App;

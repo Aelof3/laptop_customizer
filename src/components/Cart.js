@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import Summary from './Summary';
 import CartTotal from './CartTotal';
-import { USCurrencyFormat } from '../modules/USCurrencyFormat';
+import DefaultContext from './context/DefaultContext';
 
-export default class Cart extends Component {
+class Cart extends Component {
+  static contextType = DefaultContext;
+
   getSummaryList = () =>{
-    return Object.keys(this.props.selected).map((feature, idx) => {
+    return Object.keys(this.context.selected).map((feature, idx) => {
       return (
         <Summary 
           key={`${feature}-${idx}`}
           idx={idx}
           featureName={feature}
-          name={this.props.selected[feature].name}
-          cost={this.props.selected[feature].cost}
+          name={this.context.selected[feature].name}
+          cost={this.context.selected[feature].cost}
         />
       );
     });
   }
   getTotal = () => {
-      return Object.keys(this.props.selected).reduce(
-        (acc, curr) => acc + this.props.selected[curr].cost,0);
+      return Object.keys(this.context.selected).reduce(
+        (acc, curr) => acc + this.context.selected[curr].cost,0);
   }
   render(){
     return (
@@ -27,9 +29,11 @@ export default class Cart extends Component {
         <h2>Your cart</h2>
         {this.getSummaryList()}
         <CartTotal
-            total={USCurrencyFormat.format(this.getTotal())}
+            total={this.context.USCurrencyFormat.format(this.getTotal())}
           />
       </section>
     )
   }
 }
+
+export default Cart;

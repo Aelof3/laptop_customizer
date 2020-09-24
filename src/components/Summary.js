@@ -1,14 +1,19 @@
 import React from 'react';
-import { USCurrencyFormat } from '../modules/USCurrencyFormat';
+import DefaultContext from './context/DefaultContext';
 
-export default function Summary(props) {
-    return (
-        <div className="summary__option" key={props.featureName + '-' + props.idx}>
-            <div className="summary__option__label">{props.featureName} </div>
-            <div className="summary__option__value">{props.name}</div>
-            <div className="summary__option__cost">
-              {USCurrencyFormat.format(props.cost)}
+class Summary extends React.Component {
+    static contextType = DefaultContext;
+    render(){
+        return (
+            <div className="summary__option" key={this.props.featureName + '-' + this.props.idx}>
+                <div className="summary__option__label">{this.props.featureName} </div>
+                <div className="summary__option__value">{this.props.name}</div>
+                <div className="summary__option__cost">
+                {this.context.USCurrencyFormat.format(this.props.cost)}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
+
+export default Summary;

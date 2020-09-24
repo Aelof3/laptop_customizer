@@ -1,17 +1,18 @@
 import React from 'react';
 import Feature from './Feature';
+import DefaultContext from './context/DefaultContext';
 
 class FeatureForm extends React.Component {
+    static contextType = DefaultContext;
+
     getFeatureList = () => {
-        if ( typeof this.props.features !== "object" ) return;
-        return Object.keys(this.props.features).map((feature,idx)=>{
+        if ( typeof this.context.FEATURES !== "object" ) return;
+        return Object.keys(this.context.FEATURES).map((feature,idx)=>{
             return <Feature
                 name={feature}
                 key={`${feature}-${idx}`}
                 idx={idx}
-                options={this.props.features[feature]}
-                updateFeature={this.props.updateFeature}
-                selected={this.props.selected}
+                options={this.context.FEATURES[feature]}
             />
         });
         
