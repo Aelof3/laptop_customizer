@@ -1,5 +1,4 @@
 import React from 'react';
-import { USCurrencyFormat } from '../modules/USCurrencyFormat';
 
 export default function SummaryTotal(props) {
     return (
