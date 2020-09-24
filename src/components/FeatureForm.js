@@ -4,7 +4,6 @@ import Feature from './Feature';
 class FeatureForm extends React.Component {
     getFeatureList = () => {
         if ( typeof this.props.features !== "object" ) return;
-
         return Object.keys(this.props.features).map((feature,idx)=>{
             return <Feature
                 name={feature}

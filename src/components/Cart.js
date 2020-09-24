@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Summary from './Summary';
-import SummaryTotal from './SummaryTotal';
+import CartTotal from './CartTotal';
 import { USCurrencyFormat } from '../modules/USCurrencyFormat';
 
 export default class Cart extends Component {
@@ -26,7 +26,7 @@ export default class Cart extends Component {
       <section className="main__summary">
         <h2>Your cart</h2>
         {this.getSummaryList()}
-        <SummaryTotal
+        <CartTotal
             total={USCurrencyFormat.format(this.getTotal())}
           />
       </section>

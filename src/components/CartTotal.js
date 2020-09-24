@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SummaryTotal(props) {
+export default function CartTotal(props) {
     return (
         <div className="summary__total">
             <div className="summary__total__label">Total</div>
